@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurora E-Library</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">A</div>
+          <div>
+            <strong>Aurora</strong>
+            <span>E-Library</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard">Dashboard</button>
+          <button class="nav-item" data-view="catalog">Catalog</button>
+          <button class="nav-item" data-view="loans">Loans</button>
+          <button class="nav-item" data-view="members">Members</button>
+          <button class="nav-item" data-view="admin">Admin</button>
+        </nav>
+
+        <div class="sidebar-panel">
+          <p class="eyebrow">Today</p>
+          <strong id="todayLabel"></strong>
+          <span id="healthLabel"></span>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Library Operations</p>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+          <div class="global-actions">
+            <label class="search-field">
+              <span>Search</span>
+              <input id="globalSearch" type="search" placeholder="Books, authors, members..." />
+            </label>
+            <button class="icon-button" id="themeToggle" type="button" title="Toggle theme">◐</button>
+          </div>
+        </header>
+
+        <section id="dashboard" class="view active-view">
+          <div class="stats-grid" id="statsGrid"></div>
+
+          <div class="split-layout">
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Featured</p>
+                  <h2>Recommended Reads</h2>
+                </div>
+                <button class="text-button" data-jump="catalog">Open Catalog</button>
+              </div>
+              <div class="book-strip" id="featuredBooks"></div>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Action Queue</p>
+                  <h2>Needs Attention</h2>
+                </div>
+              </div>
+              <div class="task-list" id="actionQueue"></div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Insights</p>
+                <h2>Collection Health</h2>
+              </div>
+            </div>
+            <div class="insight-grid" id="insightGrid"></div>
+          </section>
+        </section>
+
+        <section id="catalog" class="view">
+          <div class="catalog-layout">
+            <aside class="filter-panel">
+              <h2>Discover</h2>
+              <label>
+                Category
+                <select id="categoryFilter"></select>
+              </label>
+              <label>
+                Availability
+                <select id="availabilityFilter">
+                  <option value="all">All titles</option>
+                  <option value="available">Available now</option>
+                  <option value="borrowed">Borrowed</option>
+                  <option value="digital">Digital access</option>
+                </select>
+              </label>
+              <label>
+                Sort by
+                <select id="sortBooks">
+                  <option value="title">Title</option>
+                  <option value="author">Author</option>
+                  <option value="rating">Rating</option>
+                  <option value="year">Newest</option>
+                  <option value="copies">Copies</option>
+                </select>
+              </label>
+              <button class="primary-button" id="addBookBtn" type="button">Add Book</button>
+            </aside>
+            <div class="catalog-content">
+              <div class="toolbar">
+                <div class="segmented" role="tablist" aria-label="Catalog display">
+                  <button class="active" data-mode="grid" type="button">Grid</button>
+                  <button data-mode="list" type="button">List</button>
+                </div>
+                <span id="catalogCount"></span>
+              </div>
+              <div id="catalogGrid" class="catalog-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="loans" class="view">
+          <div class="split-layout">
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Circulation</p>
+                  <h2>Active Loans</h2>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Book</th>
+                      <th>Member</th>
+                      <th>Due</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="loansTable"></tbody>
+                </table>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Reservations</p>
+                  <h2>Hold Shelf</h2>
+                </div>
+              </div>
+              <div class="task-list" id="reservationList"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="members" class="view">
+          <div class="member-layout">
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">People</p>
+                  <h2>Members</h2>
+                </div>
+                <button class="primary-button" id="addMemberBtn" type="button">Add Member</button>
+              </div>
+              <div class="member-grid" id="memberGrid"></div>
+            </section>
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Engagement</p>
+                  <h2>Member Activity</h2>
+                </div>
+              </div>
+              <div id="memberActivity" class="activity-feed"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="admin" class="view">
+          <div class="admin-grid">
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Acquisitions</p>
+                  <h2>Add Collection Item</h2>
+                </div>
+              </div>
+              <form id="bookForm" class="form-grid">
+                <label>Title<input name="title" required /></label>
+                <label>Author<input name="author" required /></label>
+                <label>Category<input name="category" required /></label>
+                <label>ISBN<input name="isbn" required /></label>
+                <label>Year<input name="year" type="number" min="1800" max="2099" required /></label>
+                <label>Copies<input name="copies" type="number" min="1" value="1" required /></label>
+                <label>Digital URL<input name="digitalUrl" type="url" placeholder="https://..." /></label>
+                <label class="wide">Summary<textarea name="summary" rows="4" required></textarea></label>
+                <button class="primary-button wide" type="submit">Save Book</button>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Membership</p>
+                  <h2>Register Member</h2>
+                </div>
+              </div>
+              <form id="memberForm" class="form-grid">
+                <label>Name<input name="name" required /></label>
+                <label>Email<input name="email" type="email" required /></label>
+                <label>Plan
+                  <select name="plan">
+                    <option>Student</option>
+                    <option>Faculty</option>
+                    <option>Public</option>
+                    <option>Researcher</option>
+                  </select>
+                </label>
+                <label>Status
+                  <select name="status">
+                    <option>Active</option>
+                    <option>Review</option>
+                    <option>Suspended</option>
+                  </select>
+                </label>
+                <button class="primary-button wide" type="submit">Save Member</button>
+              </form>
+            </section>
+
+            <section class="panel wide-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">System</p>
+                  <h2>Data Controls</h2>
+                </div>
+              </div>
+              <div class="data-actions">
+                <button class="secondary-button" id="exportBtn" type="button">Export JSON</button>
+                <label class="secondary-button file-control">
+                  Import JSON
+                  <input id="importInput" type="file" accept="application/json" />
+                </label>
+                <button class="danger-button" id="resetBtn" type="button">Reset Demo Data</button>
+              </div>
+              <textarea id="exportBox" readonly placeholder="Exported data appears here"></textarea>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="checkoutDialog">
+      <form method="dialog" id="checkoutForm" class="dialog-card">
+        <button class="close-button" value="cancel" type="submit">×</button>
+        <p class="eyebrow">Circulation</p>
+        <h2 id="checkoutTitle">Borrow Book</h2>
+        <input type="hidden" name="mode" value="borrow" />
+        <input type="hidden" name="bookId" />
+        <label>Member<select name="memberId" required></select></label>
+        <label id="loanPeriodField">Loan period
+          <select name="days">
+            <option value="7">7 days</option>
+            <option value="14" selected>14 days</option>
+            <option value="21">21 days</option>
+            <option value="30">30 days</option>
+          </select>
+        </label>
+        <menu>
+          <button class="secondary-button" value="cancel" type="submit">Cancel</button>
+          <button class="primary-button" value="default" type="submit">Confirm</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
