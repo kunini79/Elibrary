@@ -21,7 +21,7 @@ The target users can be divided into two main groups. The first group is library
 
 The project uses three core web programming technologies: HTML, CSS, and JavaScript. HTML is used to define the structure of the website and organize the main pages of the application. CSS is used to create the visual design, layout, responsive behavior, color system, spacing, cards, tables, forms, and dark mode. JavaScript is used to make the website interactive and dynamic. It controls navigation between pages, renders book and member data, filters the catalog, handles borrowing and returning books, calculates fines, stores data in the browser, and updates the interface after every action.
 
-The project does not require a server-side database because it is designed as a self-contained front-end web application. For data handling, the website uses the browser's `localStorage`. This allows books, members, loans, reservations, theme choice, and activity history to remain saved even after the page is refreshed. The system also includes JSON export and import functions, which allow the stored library data to be copied, backed up, restored, or transferred during a demonstration.
+The project does not require a server-side database because it is designed as a self-contained front-end web application. For data handling, the website uses the browser's IndexedDB database. This allows books, members, loans, reservations, theme choice, and activity history to remain saved even after the page is refreshed. The system also includes JSON export and import functions, which allow the stored library data to be copied, backed up, restored, or transferred during a demonstration.
 
 ## 3. HTML Structure
 
@@ -41,7 +41,7 @@ Care was taken to make the interface readable and practical. Buttons have clear 
 
 ## 5. JavaScript Usage and Dynamic Features
 
-The JavaScript file is `app.js`. It contains the main logic of the application. The script starts with seed data for books, members, active loans, reservations, and activity records. When the page loads, the app checks `localStorage` to see if saved data already exists. If there is saved data, it loads that data; otherwise, it uses the demo collection.
+The JavaScript file is `app.js`. It contains the main logic of the application. The script starts with seed data for books, members, active loans, reservations, and activity records. When the page loads, the app opens an IndexedDB database and checks whether saved records already exist. If there is saved data, it loads that data; otherwise, it writes and uses the demo collection.
 
 JavaScript dynamically renders almost every important part of the interface. The dashboard statistics are calculated from the current data. Active loans are counted, overdue loans are detected, fines are calculated, available copies are computed, and recommended books are selected by rating. The catalog is rendered from the book data and responds to search, category filters, availability filters, sorting, and display mode changes. Borrowing a book creates a loan record with a due date. Returning a book updates the loan and can change a reservation status to ready. Reservations can be placed for a selected member.
 
@@ -49,9 +49,9 @@ The member area is also dynamic. It displays members, their plan, status, active
 
 ## 6. Database Usage or Data Handling
 
-This project uses browser-based data handling instead of a traditional database server. The data is stored in `localStorage`, which is appropriate for a front-end Internet Programming project because it demonstrates persistent data handling without requiring backend setup. The stored state includes books, members, loans, reservations, and activity history. This approach allows the application to behave like a real system during demonstration because changes remain available after refreshing the page.
+This project uses browser-based data handling instead of a traditional database server. The data is stored in IndexedDB, which is a real client-side browser database and is appropriate for a front-end Internet Programming project because it demonstrates persistent structured data handling without requiring backend setup. The stored state includes books, members, loans, reservations, and activity history. This approach allows the application to behave like a real system during demonstration because changes remain available after refreshing the page.
 
-The export and import tools strengthen the data handling design. Exporting data creates a JSON representation of the library system. Importing data allows the system to restore a previous state. This is useful for backups, testing, and project demonstration. Although a production e-library would normally use a backend database such as MySQL, PostgreSQL, MongoDB, or Firebase, `localStorage` is a practical solution for this project because the assignment focuses on HTML, CSS, JavaScript, and website behavior.
+The export and import tools strengthen the data handling design. Exporting data creates a JSON representation of the library system. Importing data allows the system to restore a previous state. This is useful for backups, testing, and project demonstration. Although a production e-library would normally use a backend database such as MySQL, PostgreSQL, MongoDB, or Firebase, IndexedDB is a practical database solution for this project because the assignment focuses on HTML, CSS, JavaScript, and website behavior. The admin page also includes a benchmark tool that compares in-memory search with IndexedDB-backed search rounds.
 
 ## 7. Main Pages of the Website
 
@@ -73,7 +73,7 @@ The user experience is designed to be efficient. A global search box helps users
 
 ## 9. Challenges Faced and Solutions Applied
 
-One challenge was implementing many library features without using a backend server. The solution was to centralize the application data in a JavaScript state object and save it to `localStorage`. This gave the project persistent behavior while keeping it simple to run.
+One challenge was implementing many library features without using a backend server. The solution was to centralize the application data in a JavaScript state object and synchronize it with IndexedDB. This gave the project persistent database behavior while keeping it simple to run.
 
 Another challenge was keeping the interface comprehensive without making it crowded. The solution was to divide the website into clear pages: Dashboard, Catalog, Loans, Members, and Admin. Each page focuses on a specific workflow. This makes the system easier to understand and prevents too much information from appearing in one place.
 

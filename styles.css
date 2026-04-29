@@ -602,6 +602,26 @@ td button {
   resize: vertical;
 }
 
+.benchmark-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.35fr) minmax(0, 0.65fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.benchmark-result {
+  min-height: 84px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+
+.benchmark-result strong {
+  color: var(--ink);
+}
+
 dialog {
   width: min(460px, calc(100vw - 32px));
   border: 0;
@@ -722,7 +742,8 @@ dialog::backdrop {
   .book-strip,
   .insight-grid,
   .admin-grid,
-  .form-grid {
+  .form-grid,
+  .benchmark-grid {
     grid-template-columns: 1fr;
   }
 

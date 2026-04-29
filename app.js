@@ -1,5 +1,7 @@
-const STORAGE_KEY = "aurora-elibrary-state-v1";
-const today = new Date("2026-04-28T12:00:00+01:00");
+const DB_NAME = "aurora-elibrary-db";
+const DB_VERSION = 1;
+const STORES = ["books", "members", "loans", "reservations"];
+const today = new Date("2026-04-29T12:00:00+03:00");
 
 const coverPalettes = [
   ["#0c6b5f", "#183a59"],
@@ -14,82 +16,82 @@ const seedState = {
   books: [
     {
       id: "b1",
-      title: "Designing Data-Intensive Applications",
-      author: "Martin Kleppmann",
-      category: "Computer Science",
+      title: "Istanbul: Memories and the City",
+      author: "Orhan Pamuk",
+      category: "Turkish Literature",
       isbn: "9781449373320",
-      year: 2017,
+      year: 2003,
       copies: 4,
-      digitalUrl: "https://example.com/ddia",
-      rating: 4.9,
-      summary: "A practical guide to reliable, scalable, and maintainable data systems.",
+      digitalUrl: "https://example.com/istanbul",
+      rating: 4.8,
+      summary: "A reflective literary portrait of Istanbul, memory, identity, and urban change.",
     },
     {
       id: "b2",
-      title: "The Midnight Library",
-      author: "Matt Haig",
-      category: "Fiction",
+      title: "Internet Programming with JavaScript",
+      author: "Ayse Demir",
+      category: "Computer Science",
       isbn: "9780525559474",
-      year: 2020,
+      year: 2024,
       copies: 3,
       digitalUrl: "",
-      rating: 4.4,
-      summary: "A reflective novel about choices, regret, and possible lives.",
+      rating: 4.5,
+      summary: "A student-friendly guide to HTML, CSS, JavaScript, browser storage, and dynamic interfaces.",
     },
     {
       id: "b3",
-      title: "Atomic Habits",
-      author: "James Clear",
-      category: "Personal Development",
+      title: "Modern Database Systems",
+      author: "Mehmet Kaya",
+      category: "Database Systems",
       isbn: "9780735211292",
-      year: 2018,
+      year: 2022,
       copies: 5,
-      digitalUrl: "https://example.com/atomic-habits",
-      rating: 4.8,
-      summary: "A framework for building durable habits through small behavior changes.",
+      digitalUrl: "https://example.com/database-systems",
+      rating: 4.7,
+      summary: "Concepts for relational and browser databases, indexing, transactions, and benchmark methods.",
     },
     {
       id: "b4",
-      title: "Things Fall Apart",
-      author: "Chinua Achebe",
-      category: "African Literature",
+      title: "Memed, My Hawk",
+      author: "Yasar Kemal",
+      category: "Turkish Literature",
       isbn: "9780385474542",
       year: 1958,
       copies: 6,
       digitalUrl: "",
       rating: 4.7,
-      summary: "A landmark novel of identity, tradition, and colonial disruption.",
+      summary: "A classic novel about justice, rural Anatolia, and resistance.",
     },
     {
       id: "b5",
-      title: "Clean Architecture",
-      author: "Robert C. Martin",
-      category: "Computer Science",
+      title: "Software Engineering Practice",
+      author: "Zeynep Arslan",
+      category: "Software Engineering",
       isbn: "9780134494166",
-      year: 2017,
+      year: 2021,
       copies: 2,
-      digitalUrl: "https://example.com/clean-architecture",
+      digitalUrl: "https://example.com/software-engineering",
       rating: 4.5,
-      summary: "Principles for structuring software systems that survive change.",
+      summary: "Principles for requirements, interface design, testing, and maintainable application structure.",
     },
     {
       id: "b6",
-      title: "Sapiens",
-      author: "Yuval Noah Harari",
+      title: "A History of the Ottoman Empire",
+      author: "Halil Inalcik",
       category: "History",
       isbn: "9780062316097",
-      year: 2011,
+      year: 2000,
       copies: 4,
       digitalUrl: "",
       rating: 4.6,
-      summary: "A sweeping history of humankind and the stories that shape civilization.",
+      summary: "A historical study of Ottoman institutions, society, and state formation.",
     },
   ],
   members: [
-    { id: "m1", name: "Ada Okafor", email: "ada.okafor@example.com", plan: "Student", status: "Active", joined: "2025-09-14" },
-    { id: "m2", name: "Noah Williams", email: "noah.w@example.com", plan: "Faculty", status: "Active", joined: "2024-03-02" },
-    { id: "m3", name: "Maya Chen", email: "maya.chen@example.com", plan: "Researcher", status: "Review", joined: "2026-01-11" },
-    { id: "m4", name: "Ibrahim Musa", email: "ibrahim.m@example.com", plan: "Public", status: "Active", joined: "2025-06-20" },
+    { id: "m1", name: "Fatma Kuzey", email: "fatma.kuzey@example.com", plan: "Student", status: "Active", joined: "2025-09-14" },
+    { id: "m2", name: "Eman Ibrahim", email: "eman.ibrahim@example.com", plan: "Faculty", status: "Active", joined: "2024-03-02" },
+    { id: "m3", name: "Hussein Mohammed", email: "hussein.mohammed@example.com", plan: "Researcher", status: "Review", joined: "2026-01-11" },
+    { id: "m4", name: "Tolga Orkun", email: "tolga.orkun@example.com", plan: "Public", status: "Active", joined: "2025-06-20" },
   ],
   loans: [
     { id: "l1", bookId: "b1", memberId: "m2", borrowedAt: "2026-04-10", dueAt: "2026-04-24", returnedAt: "" },
@@ -100,13 +102,14 @@ const seedState = {
     { id: "r1", bookId: "b5", memberId: "m3", createdAt: "2026-04-23", status: "Waiting" },
   ],
   activity: [
-    "Ada borrowed Things Fall Apart.",
-    "Maya reserved Clean Architecture.",
-    "Noah has an overdue loan.",
+    "Fatma borrowed Memed, My Hawk.",
+    "Hussein reserved Software Engineering Practice.",
+    "Eman has an overdue loan.",
   ],
 };
 
-let state = loadState();
+let db;
+let state = structuredClone(seedState);
 let currentView = "dashboard";
 let catalogMode = "grid";
 
@@ -131,21 +134,95 @@ const els = {
   checkoutDialog: document.querySelector("#checkoutDialog"),
   checkoutForm: document.querySelector("#checkoutForm"),
   checkoutTitle: document.querySelector("#checkoutTitle"),
+  benchmarkQuery: document.querySelector("#benchmarkQuery"),
+  benchmarkResult: document.querySelector("#benchmarkResult"),
   toast: document.querySelector("#toast"),
 };
 
-function loadState() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return structuredClone(seedState);
-  try {
-    return JSON.parse(raw);
-  } catch {
+function openDatabase() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onupgradeneeded = () => {
+      const database = request.result;
+      STORES.forEach((storeName) => {
+        if (!database.objectStoreNames.contains(storeName)) {
+          const store = database.createObjectStore(storeName, { keyPath: "id" });
+          if (storeName === "books") {
+            store.createIndex("title", "title", { unique: false });
+            store.createIndex("author", "author", { unique: false });
+            store.createIndex("category", "category", { unique: false });
+          }
+          if (storeName === "members") {
+            store.createIndex("name", "name", { unique: false });
+            store.createIndex("email", "email", { unique: true });
+          }
+        }
+      });
+      if (!database.objectStoreNames.contains("meta")) {
+        database.createObjectStore("meta", { keyPath: "key" });
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+function transactionDone(transaction) {
+  return new Promise((resolve, reject) => {
+    transaction.oncomplete = resolve;
+    transaction.onerror = () => reject(transaction.error);
+    transaction.onabort = () => reject(transaction.error);
+  });
+}
+
+function requestResult(request) {
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function getAll(storeName) {
+  const transaction = db.transaction(storeName, "readonly");
+  return requestResult(transaction.objectStore(storeName).getAll());
+}
+
+async function getMeta(key) {
+  const transaction = db.transaction("meta", "readonly");
+  return requestResult(transaction.objectStore("meta").get(key));
+}
+
+async function writeStateToDatabase(nextState) {
+  const transaction = db.transaction([...STORES, "meta"], "readwrite");
+  STORES.forEach((storeName) => {
+    const store = transaction.objectStore(storeName);
+    store.clear();
+    nextState[storeName].forEach((record) => store.put(record));
+  });
+  transaction.objectStore("meta").put({ key: "activity", value: nextState.activity });
+  transaction.objectStore("meta").put({ key: "initialized", value: true });
+  await transactionDone(transaction);
+}
+
+async function loadStateFromDatabase() {
+  db = await openDatabase();
+  const initialized = await getMeta("initialized");
+  if (!initialized?.value) {
+    await writeStateToDatabase(seedState);
     return structuredClone(seedState);
   }
+  const activity = await getMeta("activity");
+  return {
+    books: await getAll("books"),
+    members: await getAll("members"),
+    loans: await getAll("loans"),
+    reservations: await getAll("reservations"),
+    activity: activity?.value || [],
+  };
 }
 
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  writeStateToDatabase(state).catch(() => toast("Database save failed. Please export your data and reload."));
 }
 
 function uid(prefix) {
@@ -153,7 +230,7 @@ function uid(prefix) {
 }
 
 function formatDate(value) {
-  return new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${value}T12:00:00`));
+  return new Intl.DateTimeFormat("tr-TR", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${value}T12:00:00`));
 }
 
 function daysBetween(dateA, dateB) {
@@ -180,17 +257,38 @@ function findMember(id) {
   return state.members.find((member) => member.id === id);
 }
 
+function normalizeText(value) {
+  return String(value || "")
+    .toLocaleLowerCase("tr-TR")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ı/g, "i")
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c");
+}
+
+function bookSearchText(book) {
+  return normalizeText([book.title, book.author, book.category, book.isbn, book.summary, book.year].join(" "));
+}
+
+function memberSearchText(member) {
+  return normalizeText([member.name, member.email, member.plan, member.status].join(" "));
+}
+
 function money(value) {
-  return new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 }).format(value);
+  return new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 }).format(value);
 }
 
 function calculateFine(loan) {
   const overdueDays = Math.max(0, -daysBetween(loan.dueAt, today));
-  return overdueDays * 250;
+  return overdueDays * 25;
 }
 
 function render() {
-  document.querySelector("#todayLabel").textContent = new Intl.DateTimeFormat("en", {
+  document.querySelector("#todayLabel").textContent = new Intl.DateTimeFormat("tr-TR", {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -278,14 +376,14 @@ function renderDashboard() {
 }
 
 function filteredBooks() {
-  const query = els.globalSearch.value.trim().toLowerCase();
+  const query = normalizeText(els.globalSearch.value.trim());
   const category = els.categoryFilter.value;
   const availability = els.availabilityFilter.value;
   const sortBy = els.sortBooks.value;
 
   return state.books
     .filter((book) => {
-      const matchesQuery = [book.title, book.author, book.category, book.isbn].join(" ").toLowerCase().includes(query);
+      const matchesQuery = bookSearchText(book).includes(query);
       const matchesCategory = category === "all" || book.category === category;
       const copies = availableCopies(book);
       const matchesAvailability =
@@ -375,8 +473,8 @@ function renderLoans() {
 }
 
 function renderMembers() {
-  const query = els.globalSearch.value.trim().toLowerCase();
-  const members = state.members.filter((member) => [member.name, member.email, member.plan].join(" ").toLowerCase().includes(query));
+  const query = normalizeText(els.globalSearch.value.trim());
+  const members = state.members.filter((member) => memberSearchText(member).includes(query));
   els.memberGrid.innerHTML = members
     .map((member) => {
       const loans = activeLoans().filter((loan) => loan.memberId === member.id);
@@ -399,6 +497,46 @@ function renderMembers() {
 function renderAdminSelects() {
   const options = state.members.map((member) => `<option value="${member.id}">${member.name} · ${member.plan}</option>`).join("");
   els.checkoutForm.elements.memberId.innerHTML = options;
+}
+
+async function databaseSearch(query) {
+  const normalized = normalizeText(query);
+  const [books, members] = await Promise.all([getAll("books"), getAll("members")]);
+  return {
+    books: books.filter((book) => bookSearchText(book).includes(normalized)),
+    members: members.filter((member) => memberSearchText(member).includes(normalized)),
+  };
+}
+
+async function runBenchmark() {
+  const query = els.benchmarkQuery.value.trim() || "istanbul";
+  const normalized = normalizeText(query);
+  const rounds = 250;
+
+  const memoryStart = performance.now();
+  let memoryMatches = { books: [], members: [] };
+  for (let index = 0; index < rounds; index += 1) {
+    memoryMatches = {
+      books: state.books.filter((book) => bookSearchText(book).includes(normalized)),
+      members: state.members.filter((member) => memberSearchText(member).includes(normalized)),
+    };
+  }
+  const memoryMs = performance.now() - memoryStart;
+
+  const dbStart = performance.now();
+  let dbMatches = { books: [], members: [] };
+  for (let index = 0; index < rounds; index += 1) {
+    dbMatches = await databaseSearch(query);
+  }
+  const dbMs = performance.now() - dbStart;
+
+  els.benchmarkResult.innerHTML = `
+    <strong>${rounds} search rounds for "${query}"</strong><br>
+    In-memory UI search: ${memoryMs.toFixed(2)} ms · ${memoryMatches.books.length + memoryMatches.members.length} matches<br>
+    IndexedDB search: ${dbMs.toFixed(2)} ms · ${dbMatches.books.length + dbMatches.members.length} matches<br>
+    Database: ${DB_NAME}, stores: ${STORES.join(", ")}
+  `;
+  toast("Benchmark complete.");
 }
 
 function showView(view) {
@@ -579,6 +717,10 @@ function wireEvents() {
     toast("Library data exported below.");
   });
 
+  document.querySelector("#benchmarkBtn").addEventListener("click", () => {
+    runBenchmark().catch(() => toast("Benchmark failed. Please reload and try again."));
+  });
+
   document.querySelector("#importInput").addEventListener("change", async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -609,5 +751,16 @@ function wireEvents() {
 }
 
 if (localStorage.getItem("aurora-theme") === "dark") document.body.classList.add("dark");
-wireEvents();
-render();
+
+async function boot() {
+  try {
+    state = await loadStateFromDatabase();
+  } catch {
+    state = structuredClone(seedState);
+    toast("IndexedDB unavailable. The app is running with temporary demo data.");
+  }
+  wireEvents();
+  render();
+}
+
+boot();

@@ -10,7 +10,7 @@ A self-contained browser app for managing an e-library collection.
 - Member registry with plan/status tracking and activity history.
 - Admin forms for acquisitions and member registration.
 - JSON export/import and demo-data reset.
-- Local persistence through `localStorage`.
+- IndexedDB persistence with a built-in search benchmark.
 - Responsive light/dark interface.
 
 ## Run
