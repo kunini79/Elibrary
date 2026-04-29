@@ -1,6 +1,6 @@
 # Altinbas University Internet Programming Project Report
 
-**Project Title:** Aurora E-Library System  
+**Project Title:** Muktar Library System  
 **Course:** Internet Programming  
 **Instructor:** F. Kuzey Edes Huyal  
 **Due Date:** 30 April 2026  
@@ -13,7 +13,7 @@
 
 ## 1. Website Aim and Target Users
 
-The aim of the Aurora E-Library System is to provide a clean, practical, and user-friendly digital library management website that supports the most important workflows of a modern library. The website is designed for librarians, students, researchers, teachers, and public readers who need a simple way to discover books, manage borrowing, track reservations, and review library activity. Instead of presenting only a static list of books, the system behaves like a complete front-end library application with dynamic data handling, search, filters, member records, loan tracking, overdue fine calculation, and administrative controls.
+The aim of the Muktar Library System is to provide a clean, practical, and user-friendly digital library management website that supports the most important workflows of a modern library. The website is designed for librarians, students, researchers, teachers, and public readers who need a simple way to discover books, manage borrowing, track reservations, and review library activity. Instead of presenting only a static list of books, the system behaves like a complete front-end library application with dynamic data handling, search, filters, member records, loan tracking, overdue fine calculation, and administrative controls.
 
 The target users can be divided into two main groups. The first group is library staff. Staff members need to manage the catalog, add new books, register members, check books in and out, review overdue loans, and export or import library data. The second group is library users such as students and researchers. These users need to search for books, identify which titles are available, see whether digital access exists, and reserve books when necessary. The system is built to support both groups through a clear interface and simple navigation.
 
@@ -25,7 +25,7 @@ The project does not require a server-side database because it is designed as a 
 
 ## 3. HTML Structure
 
-The main HTML file is `index.html`. It contains the complete structure of the single-page application. The page is divided into a sidebar, a top navigation area, several main views, a dialog for borrowing and reserving books, and a toast message area for feedback. The sidebar contains the Aurora E-Library brand, navigation buttons, and a small status panel. The main workspace contains the dashboard, catalog, loans, members, and admin sections.
+The main HTML file is `index.html`. It contains the complete structure of the single-page application. The page is divided into a sidebar, a top navigation area, several main views, a dialog for borrowing and reserving books, and a toast message area for feedback. The sidebar contains the Muktar Library brand, navigation buttons, and a small status panel. The main workspace contains the dashboard, catalog, loans, members, and admin sections.
 
 The dashboard section includes statistic cards, recommended books, an action queue, and collection health insights. The catalog section includes filters for category and availability, a sort control, grid/list display controls, and a dynamically rendered catalog area. The loans section contains a table of active loans and a reservation list. The members section displays member cards and recent activity. The admin section contains forms for adding books and registering members, plus system data controls for export, import, and resetting demo data.
 
@@ -98,6 +98,6 @@ This screenshot should show the add-book form, register-member form, and data co
 
 ## 11. Conclusion
 
-The Aurora E-Library System is a complete front-end web application that demonstrates core Internet Programming concepts. It uses HTML for structure, CSS for responsive and aesthetic design, and JavaScript for dynamic features and data handling. The project includes the main functions expected in an e-library system: catalog browsing, search, filtering, borrowing, returning, reservations, member management, admin forms, fine calculation, local data persistence, and JSON import/export. The final website is practical, clean, and suitable for demonstrating a holistic digital library workflow.
+The Muktar Library System is a complete front-end web application that demonstrates core Internet Programming concepts. It uses HTML for structure, CSS for responsive and aesthetic design, and JavaScript for dynamic features and data handling. The project includes the main functions expected in an e-library system: catalog browsing, search, filtering, borrowing, returning, reservations, member management, admin forms, fine calculation, local data persistence, and JSON import/export. The final website is practical, clean, and suitable for demonstrating a holistic digital library workflow.
 
 **Student Signature:** _______________________________

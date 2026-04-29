@@ -1,4 +1,4 @@
-# Aurora E-Library
+# Muktar Library
 
 A self-contained browser app for managing an e-library collection.
 

@@ -1,4 +1,4 @@
-const DB_NAME = "aurora-elibrary-db";
+const DB_NAME = "muktar-library-db";
 const DB_VERSION = 1;
 const STORES = ["books", "members", "loans", "reservations"];
 const today = new Date("2026-04-29T12:00:00+03:00");
@@ -1007,7 +1007,7 @@ function wireEvents() {
       render();
       toast("Library data imported.");
     } catch {
-      toast("That file does not look like Aurora library data.");
+      toast("That file does not look like Muktar Library data.");
     }
   });
 
@@ -1021,11 +1021,11 @@ function wireEvents() {
 
   document.querySelector("#themeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
-    localStorage.setItem("aurora-theme", document.body.classList.contains("dark") ? "dark" : "light");
+    localStorage.setItem("muktar-theme", document.body.classList.contains("dark") ? "dark" : "light");
   });
 }
 
-if (localStorage.getItem("aurora-theme") === "dark") document.body.classList.add("dark");
+if (localStorage.getItem("muktar-theme") === "dark") document.body.classList.add("dark");
 
 async function boot() {
   try {
