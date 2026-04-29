@@ -43,7 +43,7 @@ Care was taken to make the interface readable and practical. Buttons have clear 
 
 The JavaScript file is `app.js`. It contains the main logic of the application. The script starts with seed data for books, members, active loans, reservations, and activity records. When the page loads, the app opens an IndexedDB database and checks whether saved records already exist. If there is saved data, it loads that data; otherwise, it writes and uses the demo collection.
 
-JavaScript dynamically renders almost every important part of the interface. The dashboard statistics are calculated from the current data. Active loans are counted, overdue loans are detected, fines are calculated, available copies are computed, and recommended books are selected by rating. The catalog is rendered from the book data and responds to search, category filters, availability filters, sorting, and display mode changes. Borrowing a book creates a loan record with a due date. Returning a book updates the loan and can change a reservation status to ready. Reservations can be placed for a selected member.
+JavaScript dynamically renders almost every important part of the interface. The dashboard statistics are calculated from the current data. Active loans are counted, overdue loans are detected, fines are calculated, available copies are computed, and recommended books are selected by rating. The catalog is rendered from the book data and responds to search, category filters, availability filters, sorting, and display mode changes. The system includes 26 demo books, including Turkish literature, history, language, web programming, database systems, and design titles. Borrowing a book creates a loan record with a due date. Returning a book updates the loan and can change a reservation status to ready. Reservations can be placed for a selected member.
 
 The member area is also dynamic. It displays members, their plan, status, active loan count, joined date, and total fines due. The admin forms allow users to add books and register members without editing the source code. The export function converts the full application state into JSON, and the import function reads JSON back into the app. Toast messages provide feedback after actions such as adding a book, borrowing a title, returning a loan, importing data, or resetting demo data.
 
@@ -85,7 +85,7 @@ A third challenge was handling borrowing and reservations realistically. The sol
 This screenshot should show the dashboard with statistic cards, recommended books, action queue, and collection health insights. It is important because it demonstrates that the system provides a high-level operational overview for library staff.
 
 **Screenshot 2: Catalog Page**  
-This screenshot should show the catalog grid or list with search, filters, sorting controls, and book cards. It is important because it demonstrates book discovery, availability checking, borrowing, reservation, and digital access features.
+This screenshot should show the catalog grid or list with search, filters, sorting controls, and book cards. It is important because it demonstrates book discovery across 26 books, availability checking, borrowing, reservation, and digital access features.
 
 **Screenshot 3: Loans Page**  
 This screenshot should show the active loans table and reservation list. It is important because it demonstrates circulation management, due dates, return actions, and overdue fine tracking.

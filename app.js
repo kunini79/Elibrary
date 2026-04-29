@@ -86,6 +86,246 @@ const seedState = {
       rating: 4.6,
       summary: "A historical study of Ottoman institutions, society, and state formation.",
     },
+    {
+      id: "b7",
+      title: "The Museum of Innocence",
+      author: "Orhan Pamuk",
+      category: "Turkish Literature",
+      isbn: "9780307386243",
+      year: 2008,
+      copies: 4,
+      digitalUrl: "https://example.com/museum-of-innocence",
+      rating: 4.4,
+      summary: "A novel of love, memory, class, and obsession in Istanbul.",
+    },
+    {
+      id: "b8",
+      title: "The Time Regulation Institute",
+      author: "Ahmet Hamdi Tanpinar",
+      category: "Turkish Literature",
+      isbn: "9780143117651",
+      year: 1961,
+      copies: 3,
+      digitalUrl: "",
+      rating: 4.6,
+      summary: "A satirical Turkish classic about modernization, bureaucracy, and time.",
+    },
+    {
+      id: "b9",
+      title: "Madonna in a Fur Coat",
+      author: "Sabahattin Ali",
+      category: "Turkish Literature",
+      isbn: "9780241293850",
+      year: 1943,
+      copies: 5,
+      digitalUrl: "https://example.com/madonna-in-a-fur-coat",
+      rating: 4.7,
+      summary: "A quiet, emotional novel about loneliness, love, and memory.",
+    },
+    {
+      id: "b10",
+      title: "Kuyucakli Yusuf",
+      author: "Sabahattin Ali",
+      category: "Turkish Literature",
+      isbn: "9789753638024",
+      year: 1937,
+      copies: 4,
+      digitalUrl: "",
+      rating: 4.5,
+      summary: "A social novel about provincial life, injustice, and belonging.",
+    },
+    {
+      id: "b11",
+      title: "Selected Poems",
+      author: "Nazim Hikmet",
+      category: "Poetry",
+      isbn: "9780892552740",
+      year: 2002,
+      copies: 3,
+      digitalUrl: "https://example.com/nazim-hikmet-poems",
+      rating: 4.8,
+      summary: "A collection from one of Turkiye's most influential modern poets.",
+    },
+    {
+      id: "b12",
+      title: "The Flea Palace",
+      author: "Elif Shafak",
+      category: "Contemporary Fiction",
+      isbn: "9780143112717",
+      year: 2002,
+      copies: 3,
+      digitalUrl: "",
+      rating: 4.3,
+      summary: "An Istanbul apartment building becomes a portrait of city life and social tension.",
+    },
+    {
+      id: "b13",
+      title: "10 Minutes 38 Seconds in This Strange World",
+      author: "Elif Shafak",
+      category: "Contemporary Fiction",
+      isbn: "9780241293867",
+      year: 2019,
+      copies: 4,
+      digitalUrl: "https://example.com/10-minutes-38-seconds",
+      rating: 4.5,
+      summary: "A contemporary Istanbul story about memory, friendship, and marginal lives.",
+    },
+    {
+      id: "b14",
+      title: "The Bastard of Istanbul",
+      author: "Elif Shafak",
+      category: "Contemporary Fiction",
+      isbn: "9780143112718",
+      year: 2006,
+      copies: 3,
+      digitalUrl: "",
+      rating: 4.2,
+      summary: "A family novel exploring identity, memory, and historical inheritance.",
+    },
+    {
+      id: "b15",
+      title: "Istanbul: A Tale of Three Cities",
+      author: "Bettany Hughes",
+      category: "History",
+      isbn: "9780306825842",
+      year: 2017,
+      copies: 4,
+      digitalUrl: "https://example.com/istanbul-three-cities",
+      rating: 4.6,
+      summary: "A wide historical account of Byzantium, Constantinople, and Istanbul.",
+    },
+    {
+      id: "b16",
+      title: "The Ottoman Centuries",
+      author: "Lord Kinross",
+      category: "History",
+      isbn: "9780688080938",
+      year: 1977,
+      copies: 2,
+      digitalUrl: "",
+      rating: 4.4,
+      summary: "A narrative history of the Ottoman Empire across its major periods.",
+    },
+    {
+      id: "b17",
+      title: "Turkey: A Modern History",
+      author: "Erik J. Zurcher",
+      category: "History",
+      isbn: "9781784531874",
+      year: 2017,
+      copies: 3,
+      digitalUrl: "https://example.com/turkey-modern-history",
+      rating: 4.5,
+      summary: "A modern history of Turkiye from late Ottoman reforms to contemporary politics.",
+    },
+    {
+      id: "b18",
+      title: "An Introduction to Turkish Law",
+      author: "Turgut Akinturk",
+      category: "Law",
+      isbn: "9789041123162",
+      year: 2011,
+      copies: 2,
+      digitalUrl: "",
+      rating: 4.1,
+      summary: "A legal overview covering institutions, civil law, obligations, and public law.",
+    },
+    {
+      id: "b19",
+      title: "Turkish Grammar",
+      author: "Geoffrey Lewis",
+      category: "Language",
+      isbn: "9780198700364",
+      year: 2000,
+      copies: 4,
+      digitalUrl: "https://example.com/turkish-grammar",
+      rating: 4.6,
+      summary: "A detailed reference for Turkish grammar, syntax, and language structure.",
+    },
+    {
+      id: "b20",
+      title: "Elementary Turkish",
+      author: "Kurtulus Oztopcu",
+      category: "Language",
+      isbn: "9789757981409",
+      year: 2006,
+      copies: 5,
+      digitalUrl: "",
+      rating: 4.4,
+      summary: "A practical Turkish language textbook for beginners and classroom learners.",
+    },
+    {
+      id: "b21",
+      title: "Database Design for Web Applications",
+      author: "Fatma Kuzey",
+      category: "Database Systems",
+      isbn: "9786050000001",
+      year: 2025,
+      copies: 5,
+      digitalUrl: "https://example.com/database-design-web",
+      rating: 4.7,
+      summary: "A practical guide to web application data models, IndexedDB, SQL concepts, and benchmarks.",
+    },
+    {
+      id: "b22",
+      title: "Client-Side Storage with IndexedDB",
+      author: "Eman Ibrahim",
+      category: "Web Programming",
+      isbn: "9786050000002",
+      year: 2026,
+      copies: 4,
+      digitalUrl: "https://example.com/indexeddb-storage",
+      rating: 4.8,
+      summary: "A focused guide to IndexedDB object stores, transactions, search, and browser persistence.",
+    },
+    {
+      id: "b23",
+      title: "Benchmarking JavaScript Applications",
+      author: "Hussein Mohammed",
+      category: "Web Programming",
+      isbn: "9786050000003",
+      year: 2025,
+      copies: 3,
+      digitalUrl: "",
+      rating: 4.5,
+      summary: "Methods for measuring search, rendering, storage, and user interaction performance.",
+    },
+    {
+      id: "b24",
+      title: "Responsive Interface Design",
+      author: "Tolga Orkun",
+      category: "Design",
+      isbn: "9786050000004",
+      year: 2024,
+      copies: 4,
+      digitalUrl: "https://example.com/responsive-interface-design",
+      rating: 4.6,
+      summary: "A design handbook for accessible, responsive, and maintainable web interfaces.",
+    },
+    {
+      id: "b25",
+      title: "Cybersecurity Basics for Students",
+      author: "Selin Yilmaz",
+      category: "Computer Science",
+      isbn: "9786050000005",
+      year: 2023,
+      copies: 3,
+      digitalUrl: "",
+      rating: 4.3,
+      summary: "An introduction to authentication, browser safety, secure forms, and data protection.",
+    },
+    {
+      id: "b26",
+      title: "Data Visualization in the Browser",
+      author: "Can Aydin",
+      category: "Computer Science",
+      isbn: "9786050000006",
+      year: 2022,
+      copies: 4,
+      digitalUrl: "https://example.com/browser-data-visualization",
+      rating: 4.4,
+      summary: "Techniques for turning web application data into dashboards, charts, and insights.",
+    },
   ],
   members: [
     { id: "m1", name: "Fatma Kuzey", email: "fatma.kuzey@example.com", plan: "Student", status: "Active", joined: "2025-09-14" },
@@ -212,17 +452,39 @@ async function loadStateFromDatabase() {
     return structuredClone(seedState);
   }
   const activity = await getMeta("activity");
-  return {
+  const storedState = {
     books: await getAll("books"),
     members: await getAll("members"),
     loans: await getAll("loans"),
     reservations: await getAll("reservations"),
     activity: activity?.value || [],
   };
+  const upgradedState = mergeSeedRecords(storedState);
+  if (upgradedState.changed) await writeStateToDatabase(upgradedState.state);
+  return upgradedState.state;
 }
 
 function saveState() {
   writeStateToDatabase(state).catch(() => toast("Database save failed. Please export your data and reload."));
+}
+
+function mergeSeedRecords(storedState) {
+  let changed = false;
+  const nextState = structuredClone(storedState);
+  STORES.forEach((storeName) => {
+    const existingIds = new Set(nextState[storeName].map((record) => record.id));
+    seedState[storeName].forEach((record) => {
+      if (!existingIds.has(record.id)) {
+        nextState[storeName].push(structuredClone(record));
+        changed = true;
+      }
+    });
+  });
+  if (!nextState.activity?.length) {
+    nextState.activity = structuredClone(seedState.activity);
+    changed = true;
+  }
+  return { state: nextState, changed };
 }
 
 function uid(prefix) {
@@ -403,9 +665,15 @@ function filteredBooks() {
 
 function renderCatalog() {
   const books = filteredBooks();
+  const query = els.globalSearch.value.trim();
   els.catalogGrid.className = `catalog-grid ${catalogMode === "list" ? "list-mode" : ""}`;
-  els.catalogCount.textContent = `${books.length} ${books.length === 1 ? "title" : "titles"} shown`;
-  els.catalogGrid.innerHTML = books.map((book) => bookCard(book, true, catalogMode === "list")).join("");
+  els.catalogCount.textContent = `${books.length} of ${state.books.length} ${state.books.length === 1 ? "title" : "titles"} shown${query ? ` for "${query}"` : ""}`;
+  els.catalogGrid.innerHTML = books.length
+    ? books.map((book) => bookCard(book, true, catalogMode === "list")).join("")
+    : `<article class="empty-state">
+        <strong>No books found</strong>
+        <p>Try searching by title, author, category, ISBN, summary, or year.</p>
+      </article>`;
 }
 
 function bookCard(book, withActions, list = false) {
@@ -669,7 +937,14 @@ function addMember(form) {
 function wireEvents() {
   els.navItems.forEach((item) => item.addEventListener("click", () => showView(item.dataset.view)));
   document.querySelectorAll("[data-jump]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.jump)));
-  [els.globalSearch, els.categoryFilter, els.availabilityFilter, els.sortBooks].forEach((control) => control.addEventListener("input", render));
+  els.globalSearch.addEventListener("input", () => {
+    if (els.globalSearch.value.trim() && !["catalog", "members"].includes(currentView)) {
+      showView("catalog");
+      return;
+    }
+    render();
+  });
+  [els.categoryFilter, els.availabilityFilter, els.sortBooks].forEach((control) => control.addEventListener("input", render));
 
   document.querySelector(".segmented").addEventListener("click", (event) => {
     const button = event.target.closest("button");

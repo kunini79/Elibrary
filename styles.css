@@ -315,6 +315,26 @@ textarea:focus {
   padding: 14px;
 }
 
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 28px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty-state strong {
+  display: block;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  margin-bottom: 0;
+}
+
 .book-card.list {
   grid-template-columns: 86px minmax(0, 1fr) auto;
   align-items: center;
