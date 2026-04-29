@@ -15,19 +15,19 @@
 
 The aim of the Muktar Library System is to provide a clean, practical, and user-friendly digital library management website that supports the most important workflows of a modern library. The website is designed for librarians, students, researchers, teachers, and public readers who need a simple way to discover books, manage borrowing, track reservations, and review library activity. Instead of presenting only a static list of books, the system behaves like a complete front-end library application with dynamic data handling, search, filters, member records, loan tracking, overdue fine calculation, and administrative controls.
 
-The target users can be divided into two main groups. The first group is library staff. Staff members need to manage the catalog, add new books, register members, check books in and out, review overdue loans, and export or import library data. The second group is library users such as students and researchers. These users need to search for books, identify which titles are available, see whether digital access exists, and reserve books when necessary. The system is built to support both groups through a clear interface and simple navigation.
+The target users can be divided into two main groups. The first group is library staff. Staff members need to manage the catalog, add new books, register members, check books in and out, and review overdue loans. The second group is library users such as students and researchers. These users need to search for books, identify which titles are available, see whether digital access exists, and reserve books when necessary. The system is built to support both groups through a clear interface and simple navigation.
 
 ## 2. Technologies Used
 
 The project uses three core web programming technologies: HTML, CSS, and JavaScript. HTML is used to define the structure of the website and organize the main pages of the application. CSS is used to create the visual design, layout, responsive behavior, color system, spacing, cards, tables, forms, and dark mode. JavaScript is used to make the website interactive and dynamic. It controls navigation between pages, renders book and member data, filters the catalog, handles borrowing and returning books, calculates fines, stores data in the browser, and updates the interface after every action.
 
-The project does not require a server-side database because it is designed as a self-contained front-end web application. For data handling, the website uses the browser's IndexedDB database. This allows books, members, loans, reservations, theme choice, and activity history to remain saved even after the page is refreshed. The system also includes JSON export and import functions, which allow the stored library data to be copied, backed up, restored, or transferred during a demonstration.
+The project does not require a server-side database because it is designed as a self-contained front-end web application. For data handling, the website uses the browser's IndexedDB database. This allows books, members, loans, reservations, theme choice, and activity history to remain saved even after the page is refreshed.
 
 ## 3. HTML Structure
 
 The main HTML file is `index.html`. It contains the complete structure of the single-page application. The page is divided into a sidebar, a top navigation area, several main views, a dialog for borrowing and reserving books, and a toast message area for feedback. The sidebar contains the Muktar Library brand, navigation buttons, and a small status panel. The main workspace contains the dashboard, catalog, loans, members, and admin sections.
 
-The dashboard section includes statistic cards, recommended books, an action queue, and collection health insights. The catalog section includes filters for category and availability, a sort control, grid/list display controls, and a dynamically rendered catalog area. The loans section contains a table of active loans and a reservation list. The members section displays member cards and recent activity. The admin section contains forms for adding books and registering members, plus system data controls for export, import, and resetting demo data.
+The dashboard section includes statistic cards, recommended books, an action queue, and collection health insights. The catalog section includes filters for category and availability, a sort control, grid/list display controls, and a dynamically rendered catalog area. The loans section contains a table of active loans and a reservation list. The members section displays member cards and recent activity. The admin section contains forms for adding books and registering members.
 
 The HTML also uses semantic elements such as `aside`, `main`, `header`, `section`, `article`, `table`, `form`, and `dialog`. These elements make the document easier to understand and maintain. Form fields are grouped with labels so users can clearly understand what each input is for.
 
@@ -45,13 +45,13 @@ The JavaScript file is `app.js`. It contains the main logic of the application. 
 
 JavaScript dynamically renders almost every important part of the interface. The dashboard statistics are calculated from the current data. Active loans are counted, overdue loans are detected, fines are calculated, available copies are computed, and recommended books are selected by rating. The catalog is rendered from the book data and responds to search, category filters, availability filters, sorting, and display mode changes. The system includes 26 demo books, including Turkish literature, history, language, web programming, database systems, and design titles. Borrowing a book creates a loan record with a due date. Returning a book updates the loan and can change a reservation status to ready. Reservations can be placed for a selected member.
 
-The member area is also dynamic. It displays members, their plan, status, active loan count, joined date, and total fines due. The admin forms allow users to add books and register members without editing the source code. The export function converts the full application state into JSON, and the import function reads JSON back into the app. Toast messages provide feedback after actions such as adding a book, borrowing a title, returning a loan, importing data, or resetting demo data.
+The member area is also dynamic. It displays members, their plan, status, active loan count, joined date, and total fines due. The admin forms allow users to add books and register members without editing the source code. Toast messages provide feedback after actions such as adding a book, borrowing a title, returning a loan, and placing a reservation.
 
 ## 6. Database Usage or Data Handling
 
 This project uses browser-based data handling instead of a traditional database server. The data is stored in IndexedDB, which is a real client-side browser database and is appropriate for a front-end Internet Programming project because it demonstrates persistent structured data handling without requiring backend setup. The stored state includes books, members, loans, reservations, and activity history. This approach allows the application to behave like a real system during demonstration because changes remain available after refreshing the page.
 
-The export and import tools strengthen the data handling design. Exporting data creates a JSON representation of the library system. Importing data allows the system to restore a previous state. This is useful for backups, testing, and project demonstration. Although a production e-library would normally use a backend database such as MySQL, PostgreSQL, MongoDB, or Firebase, IndexedDB is a practical database solution for this project because the assignment focuses on HTML, CSS, JavaScript, and website behavior. The admin page also includes a benchmark tool that compares in-memory search with IndexedDB-backed search rounds.
+IndexedDB strengthens the data handling design because it stores structured records directly in the browser. Although a production e-library would normally use a backend database such as MySQL, PostgreSQL, MongoDB, or Firebase, IndexedDB is a practical database solution for this project because the assignment focuses on HTML, CSS, JavaScript, and website behavior.
 
 ## 7. Main Pages of the Website
 
@@ -63,7 +63,7 @@ The third page is Loans. It shows all active loans in a table, including book ti
 
 The fourth page is Members. It shows registered users of the library and their activity. Each member card includes name, email, membership plan, account status, active loan count, joined date, and fines. This page supports library staff in monitoring member records.
 
-The fifth page is Admin. It contains the book acquisition form, member registration form, and data management tools. This page is important because it allows staff to maintain the library collection and membership list.
+The fifth page is Admin. It contains the book acquisition form and member registration form. This page is important because it allows staff to maintain the library collection and membership list.
 
 ## 8. Navigation and User Experience
 
@@ -94,10 +94,10 @@ This screenshot should show the active loans table and reservation list. It is i
 This screenshot should show member cards and recent activity. It is important because it demonstrates member management and user engagement tracking.
 
 **Screenshot 5: Admin Page**  
-This screenshot should show the add-book form, register-member form, and data controls. It is important because it demonstrates how library staff can maintain the collection and manage data.
+This screenshot should show the add-book form and register-member form. It is important because it demonstrates how library staff can maintain the collection and membership records.
 
 ## 11. Conclusion
 
-The Muktar Library System is a complete front-end web application that demonstrates core Internet Programming concepts. It uses HTML for structure, CSS for responsive and aesthetic design, and JavaScript for dynamic features and data handling. The project includes the main functions expected in an e-library system: catalog browsing, search, filtering, borrowing, returning, reservations, member management, admin forms, fine calculation, local data persistence, and JSON import/export. The final website is practical, clean, and suitable for demonstrating a holistic digital library workflow.
+The Muktar Library System is a complete front-end web application that demonstrates core Internet Programming concepts. It uses HTML for structure, CSS for responsive and aesthetic design, and JavaScript for dynamic features and data handling. The project includes the main functions expected in an e-library system: catalog browsing, search, filtering, borrowing, returning, reservations, member management, admin forms, fine calculation, and local database persistence. The final website is practical, clean, and suitable for demonstrating a holistic digital library workflow.
 
 **Student Signature:** _______________________________

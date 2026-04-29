@@ -237,42 +237,6 @@
               </form>
             </section>
 
-            <section class="panel wide-panel">
-              <div class="section-heading">
-                <div>
-                  <p class="eyebrow">System</p>
-                  <h2>Data Controls</h2>
-                </div>
-              </div>
-              <div class="data-actions">
-                <button class="secondary-button" id="exportBtn" type="button">Export JSON</button>
-                <label class="secondary-button file-control">
-                  Import JSON
-                  <input id="importInput" type="file" accept="application/json" />
-                </label>
-                <button class="danger-button" id="resetBtn" type="button">Reset Demo Data</button>
-              </div>
-              <textarea id="exportBox" readonly placeholder="Exported data appears here"></textarea>
-            </section>
-
-            <section class="panel wide-panel">
-              <div class="section-heading">
-                <div>
-                  <p class="eyebrow">IndexedDB</p>
-                  <h2>Search Benchmark</h2>
-                </div>
-                <button class="primary-button" id="benchmarkBtn" type="button">Run Benchmark</button>
-              </div>
-              <div class="benchmark-grid">
-                <label>
-                  Benchmark query
-                  <input id="benchmarkQuery" value="istanbul" />
-                </label>
-                <div class="benchmark-result" id="benchmarkResult">
-                  Run a benchmark to compare in-memory search with the IndexedDB-backed dataset.
-                </div>
-              </div>
-            </section>
           </div>
         </section>
       </main>

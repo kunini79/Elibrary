@@ -9,8 +9,7 @@ A self-contained browser app for managing an e-library collection.
 - Circulation workflows for active loans, returns, due dates, overdue status, and automatic fine calculation.
 - Member registry with plan/status tracking and activity history.
 - Admin forms for acquisitions and member registration.
-- JSON export/import and demo-data reset.
-- IndexedDB persistence with a built-in search benchmark.
+- IndexedDB persistence for books, members, loans, reservations, and activity.
 - Responsive light/dark interface.
 
 ## Run

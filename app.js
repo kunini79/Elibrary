@@ -374,8 +374,6 @@ const els = {
   checkoutDialog: document.querySelector("#checkoutDialog"),
   checkoutForm: document.querySelector("#checkoutForm"),
   checkoutTitle: document.querySelector("#checkoutTitle"),
-  benchmarkQuery: document.querySelector("#benchmarkQuery"),
-  benchmarkResult: document.querySelector("#benchmarkResult"),
   toast: document.querySelector("#toast"),
 };
 
@@ -767,46 +765,6 @@ function renderAdminSelects() {
   els.checkoutForm.elements.memberId.innerHTML = options;
 }
 
-async function databaseSearch(query) {
-  const normalized = normalizeText(query);
-  const [books, members] = await Promise.all([getAll("books"), getAll("members")]);
-  return {
-    books: books.filter((book) => bookSearchText(book).includes(normalized)),
-    members: members.filter((member) => memberSearchText(member).includes(normalized)),
-  };
-}
-
-async function runBenchmark() {
-  const query = els.benchmarkQuery.value.trim() || "istanbul";
-  const normalized = normalizeText(query);
-  const rounds = 250;
-
-  const memoryStart = performance.now();
-  let memoryMatches = { books: [], members: [] };
-  for (let index = 0; index < rounds; index += 1) {
-    memoryMatches = {
-      books: state.books.filter((book) => bookSearchText(book).includes(normalized)),
-      members: state.members.filter((member) => memberSearchText(member).includes(normalized)),
-    };
-  }
-  const memoryMs = performance.now() - memoryStart;
-
-  const dbStart = performance.now();
-  let dbMatches = { books: [], members: [] };
-  for (let index = 0; index < rounds; index += 1) {
-    dbMatches = await databaseSearch(query);
-  }
-  const dbMs = performance.now() - dbStart;
-
-  els.benchmarkResult.innerHTML = `
-    <strong>${rounds} search rounds for "${query}"</strong><br>
-    In-memory UI search: ${memoryMs.toFixed(2)} ms · ${memoryMatches.books.length + memoryMatches.members.length} matches<br>
-    IndexedDB search: ${dbMs.toFixed(2)} ms · ${dbMatches.books.length + dbMatches.members.length} matches<br>
-    Database: ${DB_NAME}, stores: ${STORES.join(", ")}
-  `;
-  toast("Benchmark complete.");
-}
-
 function showView(view) {
   currentView = view;
   els.navItems.forEach((item) => item.classList.toggle("active", item.dataset.view === view));
@@ -986,38 +944,6 @@ function wireEvents() {
 
   document.querySelector("#addBookBtn").addEventListener("click", () => showView("admin"));
   document.querySelector("#addMemberBtn").addEventListener("click", () => showView("admin"));
-
-  document.querySelector("#exportBtn").addEventListener("click", () => {
-    document.querySelector("#exportBox").value = JSON.stringify(state, null, 2);
-    toast("Library data exported below.");
-  });
-
-  document.querySelector("#benchmarkBtn").addEventListener("click", () => {
-    runBenchmark().catch(() => toast("Benchmark failed. Please reload and try again."));
-  });
-
-  document.querySelector("#importInput").addEventListener("change", async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-    try {
-      const imported = JSON.parse(await file.text());
-      if (!imported.books || !imported.members || !imported.loans) throw new Error("Invalid data");
-      state = imported;
-      saveState();
-      render();
-      toast("Library data imported.");
-    } catch {
-      toast("That file does not look like Muktar Library data.");
-    }
-  });
-
-  document.querySelector("#resetBtn").addEventListener("click", () => {
-    if (!confirm("Reset all local library data to the demo collection?")) return;
-    state = structuredClone(seedState);
-    saveState();
-    render();
-    toast("Demo data restored.");
-  });
 
   document.querySelector("#themeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
